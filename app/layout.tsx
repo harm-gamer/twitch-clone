@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-
+import { ClerkProvider } from "@clerk/nextjs";
+import { dark } from '@clerk/themes'
+import { ThemeProvider } from "@/components/theme-provider";
+import { Inter } from "next/font/google";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -24,12 +27,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <ClerkProvider appearance={{baseTheme : dark}}>
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+       className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        
+      ><ThemeProvider attribute="class" forcedTheme="dark" storageKey="gamehub-theme">
         {children}
+        </ThemeProvider>
       </body>
     </html>
+    </ClerkProvider>
   );
 }
