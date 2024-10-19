@@ -7,7 +7,7 @@ const AppLayout = ({
     children : React.ReactNode
 }) =>{
     return(
-        <div className="h-full flex items-center flex-col justify-center">
+        <div className="h-full flex items-center flex-col justify-center space-y-6">
             <Logo/>
          {children}
         </div>
