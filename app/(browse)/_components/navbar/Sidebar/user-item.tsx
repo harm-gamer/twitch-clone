@@ -7,6 +7,9 @@ import { Button } from "@/components/ui/button";
 import { useSidebar } from "@/store/use-sidebar";
 import Link from "next/link";
 import { UserAvatar } from "@/components/user-avatar";
+import { LiveBadge } from "@/components/live-Badge";
+import { EclipseIcon } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface UserItemProps{
     username : string;
@@ -42,8 +45,28 @@ export const UserItem = ({username,imageUrl,isLive}:UserItemProps) =>{
             isLive = {isLive}
             showBadge
            />
+           {!Collapsed && (
+            <p className="truncate">
+                {username}
+            </p>
+           )}
+           {!Collapsed && isLive && (
+            <LiveBadge  className="ml-auto"/>
+           )}
            </div>
          </Link>
         </Button>
+    )
+}
+
+export const UserItemSkeleton = () =>{
+    return (
+        <li className="flex items-center gap-x-4 px-3 py-2">
+            
+            <Skeleton  className="m-h-[32px] min-w-[32px] rounded-full"/>
+            <div className="flex-1">
+                <Skeleton className="h-6"/>
+            </div>
+        </li>
     )
 }
